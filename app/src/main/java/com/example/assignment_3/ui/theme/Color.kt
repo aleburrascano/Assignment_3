@@ -2,10 +2,13 @@ package com.example.assignment_3.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
-val Purple80 = Color(0xFFD0BCFF)
-val PurpleGrey80 = Color(0xFFCCC2DC)
-val Pink80 = Color(0xFFEFB8C8)
+// Light theme colors - warm, food-inspired
+val OrangeRed = Color(0xFFFF6B35)  // Primary - vibrant orange
+val DeepOrange = Color(0xFFF7931E)  // Secondary
+val Cream = Color(0xFFFFF8E7)  // Background
+val DarkBrown = Color(0xFF4A2C2A)  // Text
 
-val Purple40 = Color(0xFF6650a4)
-val PurpleGrey40 = Color(0xFF625b71)
-val Pink40 = Color(0xFF7D5260)
+// Dark theme colors
+val LightOrange = Color(0xFFFFB380)
+val PeachOrange = Color(0xFFFFCC99)
+val DarkBackground = Color(0xFF1A1A1A)
