@@ -11,8 +11,6 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Delete
-import androidx.compose.material.icons.filled.Edit
 import androidx.compose.material.icons.filled.LocationOn
 import androidx.compose.material.icons.filled.Star
 import androidx.compose.material3.Card
@@ -75,26 +73,6 @@ fun AboutScreen() {
                         style = MaterialTheme.typography.titleLarge,
                         color = MaterialTheme.colorScheme.primary
                     )
-
-                    FeatureItem(
-                        icon = Icons.Default.Edit,
-                        text = "Create and save your favorite recipes"
-                    )
-
-                    FeatureItem(
-                        icon = Icons.Default.Star,
-                        text = "Add photos to your recipes"
-                    )
-
-                    FeatureItem(
-                        icon = Icons.Default.Star,
-                        text = "Organize ingredients with measurements"
-                    )
-
-                    FeatureItem(
-                        icon = Icons.Default.Delete,
-                        text = "Easy recipe management"
-                    )
                 }
             }
         }
@@ -105,18 +83,6 @@ fun AboutScreen() {
 fun FeatureItem(icon: ImageVector, text: String) {
     Row(
         horizontalArrangement = Arrangement.spacedBy(12.dp),
-        verticalAlignment = Alignment.CenterVertically
-    ) {
-        Icon(
-            imageVector = icon,
-            contentDescription = text,
-            tint = MaterialTheme.colorScheme.primary,
-            modifier = Modifier.size(24.dp)
-        )
-
-        Text(
-            text = text,
-            style = MaterialTheme.typography.bodyLarge
-        )
-    }
+        verticalAlignment = 
+    ) {  }
 }
