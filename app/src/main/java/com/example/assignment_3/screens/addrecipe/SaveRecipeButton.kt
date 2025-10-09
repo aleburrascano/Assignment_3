@@ -1,0 +1,71 @@
+package com.example.assignment_3.screens.addrecipe
+
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.dp
+import com.example.assignment_3.models.Ingredient
+import com.example.assignment_3.models.Recipe
+
+/**
+ * Save button with form validation for recipe creation.
+ *
+ * @param recipeName Current recipe name
+ * @param ingredients List of current ingredients
+ * @param imageUri Selected image URI (can be null)
+ * @param onError Callback for validation errors (receives error message)
+ * @param onSave Callback when recipe is valid and should be saved (receives Recipe)
+ */
+@Composable
+fun SaveRecipeButton(
+    recipeName: String,
+    ingredients: List<Ingredient>,
+    imageUri: String?,
+    onError: (String) -> Unit,
+    onSave: (Recipe) -> Unit
+) {
+    Button(
+        onClick = {
+            when {
+                recipeName.isBlank() -> {
+                    onError("Please enter a recipe name")
+                }
+                recipeName.length < 3 -> {
+                    onError("Recipe name must be at least 3 characters long")
+                }
+                ingredients.isEmpty() -> {
+                    onError("Please add at least one ingredient")
+                }
+                else -> {
+                    onSave(
+                        Recipe(
+                            name = recipeName.trim(),
+                            ingredients = ingredients,
+                            imageUri = imageUri ?: ""
+                        )
+                    )
+                }
+            }
+        },
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(56.dp),
+        shape = RoundedCornerShape(12.dp),
+        colors = ButtonDefaults.buttonColors(
+            containerColor = MaterialTheme.colorScheme.primary
+        )
+    ) {
+        Text(
+            text = "Save Recipe",
+            style = MaterialTheme.typography.titleMedium,
+            fontWeight = FontWeight.SemiBold
+        )
+    }
+}

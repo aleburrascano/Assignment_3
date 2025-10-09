@@ -1,0 +1,74 @@
+package com.example.assignment_3.screens.recipelist
+
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.ElevatedCard
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
+import com.example.assignment_3.models.Recipe
+
+/**
+ * Individual recipe card item for the list.
+ *
+ * Features:
+ * - Recipe thumbnail with fallback placeholder
+ * - Recipe name with overflow handling
+ * - Ingredient count display
+ * - Delete button with error styling
+ * - Click navigation to recipe details
+ * - Elevated card design with rounded corners
+ *
+ * @param recipe Recipe data to display
+ * @param onRecipeClick Callback when recipe card is tapped
+ * @param onDeleteClick Callback when delete button is tapped
+ */
+@Composable
+fun RecipeListItem(
+    recipe: Recipe,
+    onRecipeClick: () -> Unit,
+    onDeleteClick: () -> Unit
+) {
+    ElevatedCard(
+        modifier = Modifier
+            .fillMaxWidth()
+            .clickable { onRecipeClick() },
+        elevation = CardDefaults.elevatedCardElevation(defaultElevation = 2.dp),
+        colors = CardDefaults.elevatedCardColors(
+            containerColor = MaterialTheme.colorScheme.surface
+        ),
+        shape = RoundedCornerShape(12.dp)
+    ) {
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(12.dp),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            RecipeImage(
+                imageUri = recipe.imageUri,
+                recipeName = recipe.name
+            )
+
+            Spacer(modifier = Modifier.width(16.dp))
+
+            RecipeInfo(
+                name = recipe.name,
+                ingredientCount = recipe.ingredients.size,
+                modifier = Modifier.weight(1f)
+            )
+
+            Spacer(modifier = Modifier.width(8.dp))
+
+            DeleteButton(onClick = onDeleteClick)
+        }
+    }
+}

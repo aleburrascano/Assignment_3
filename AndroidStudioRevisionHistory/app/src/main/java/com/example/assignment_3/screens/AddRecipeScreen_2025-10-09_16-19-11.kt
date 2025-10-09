@@ -61,6 +61,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import com.example.assignment_3.composables.AddIngredientDialog
+import com.example.assignment_3.composables.RecipeNameInput
+import com.example.assignment_3.composables.RecipePhotoSection
 import com.example.assignment_3.layouts.MainLayout
 import com.example.assignment_3.models.Ingredient
 import com.example.assignment_3.models.Recipe
@@ -106,116 +108,18 @@ fun AddRecipeScreen() {
                 verticalArrangement = Arrangement.spacedBy(20.dp)
             ) {
                 // Recipe Name Input
-                OutlinedCard(
-                    modifier = Modifier.fillMaxWidth(),
-                    colors = CardDefaults.outlinedCardColors(
-                        containerColor = MaterialTheme.colorScheme.surface
-                    )
-                ) {
-                    Column(modifier = Modifier.padding(16.dp)) {
-                        Text(
-                            text = "Recipe Name",
-                            style = MaterialTheme.typography.titleMedium,
-                            color = MaterialTheme.colorScheme.primary,
-                            fontWeight = FontWeight.SemiBold
-                        )
-
-                        Spacer(modifier = Modifier.height(8.dp))
-
-                        OutlinedTextField(
-                            value = recipeName,
-                            onValueChange = {
-                                recipeName = it
-                                showError = false
-                            },
-                            placeholder = { Text(text = "Chocolate Chip Cookies") },
-                            modifier = Modifier.fillMaxWidth(),
-                            singleLine = true,
-                            shape = RoundedCornerShape(12.dp),
-                            colors = OutlinedTextFieldDefaults.colors(
-                                focusedBorderColor = MaterialTheme.colorScheme.primary,
-                                focusedLabelColor = MaterialTheme.colorScheme.primary
-                            )
-                        )
+                RecipeNameInput(
+                    recipeName = recipeName,
+                    onRecipeNameChange = {
+                        recipeName = it
+                        showError = false
                     }
-                }
+                )
 
                 // Image Selection
-                OutlinedCard(
-                    modifier = Modifier.fillMaxWidth(),
-                    colors = CardDefaults.outlinedCardColors(
-                        containerColor = MaterialTheme.colorScheme.surface
-                    )
-                ) {
-                    Column(
-                        modifier = Modifier.padding(16.dp),
-                        horizontalAlignment = Alignment.CenterHorizontally,
-                        verticalArrangement = Arrangement.spacedBy(12.dp)
-                    ) {
-                        Text(
-                            text = "Recipe Photo",
-                            style = MaterialTheme.typography.titleMedium,
-                            color = MaterialTheme.colorScheme.primary,
-                            fontWeight = FontWeight.SemiBold,
-                            modifier = Modifier.fillMaxWidth()
-                        )
-
-                        if (imageUri != null) {
-                            AsyncImage(
-                                model = imageUri,
-                                contentDescription = recipeName,
-                                modifier = Modifier
-                                    .fillMaxWidth()
-                                    .height(200.dp)
-                                    .clip(RoundedCornerShape(12.dp)),
-                                contentScale = ContentScale.Crop
-                            )
-                        } else {
-                            Box(
-                                modifier = Modifier
-                                    .fillMaxWidth()
-                                    .height(200.dp)
-                                    .clip(RoundedCornerShape(12.dp))
-                                    .background(MaterialTheme.colorScheme.surfaceVariant),
-                                contentAlignment = Alignment.Center
-                            ) {
-                                Column(
-                                    horizontalAlignment = Alignment.CenterHorizontally,
-                                    verticalArrangement = Arrangement.spacedBy(8.dp)
-                                ) {
-                                    Icon(
-                                        painter = painterResource(R.drawable.material_symbols_outlined_photo_camera),
-                                        contentDescription = "No photo selected",
-                                        modifier = Modifier.size(48.dp),
-                                        tint = MaterialTheme.colorScheme.onSurfaceVariant
-                                    )
-                                    Text(
-                                        text = "No photo selected",
-                                        style = MaterialTheme.typography.bodyMedium,
-                                        color = MaterialTheme.colorScheme.onSurfaceVariant
-                                    )
-                                }
-                            }
-                        }
-
-                        OutlinedButton(
-                            onClick = {
-                                photoPickerLauncher.launch(
-                                    PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly)
-                                )
-                            },
-                            modifier = Modifier.fillMaxWidth()
-                        ) {
-                            Icon(
-                                painter = painterResource(R.drawable.material_symbols_outlined_photo_camera_back),
-                                contentDescription = "Photo",
-                                modifier = Modifier.size(18.dp)
-                            )
-                            Spacer(modifier = Modifier.width(8.dp))
-                            Text(text = if (imageUri == null) "Add Photo" else "Change Photo")
-                        }
-                    }
-                }
+                RecipePhotoSection(
+                    imageUri
+                )
 
                 // Ingredients Section
                 OutlinedCard(

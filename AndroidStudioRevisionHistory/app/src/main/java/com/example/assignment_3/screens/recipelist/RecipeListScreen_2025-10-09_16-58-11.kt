@@ -1,4 +1,4 @@
-package com.example.assignment_3.screens
+package com.example.assignment_3.screens.recipelist
 
 import com.example.assignment_3.R
 import androidx.compose.foundation.clickable
@@ -46,6 +46,17 @@ import com.example.assignment_3.navigation.LocalNavController
 import com.example.assignment_3.navigation.LocalRecipeViewModel
 import com.example.assignment_3.navigation.Routes
 
+/**
+ * Main screen displaying a list of all saved recipes.
+ *
+ * Features:
+ * - Empty state with call-to-action when no recipes exist
+ * - Scrollable list of recipe cards with thumbnails
+ * - Recipe count header with helpful instructions
+ * - Click navigation to recipe details
+ * - Delete functionality with confirmation
+ * - Responsive layout with proper spacing
+ */
 @Composable
 fun RecipeListScreen() {
     val navController = LocalNavController.current
@@ -53,98 +64,21 @@ fun RecipeListScreen() {
 
     MainLayout(screenTitle = "My Recipes") {
         if (viewModel.recipes.isEmpty()) {
-            Column(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .verticalScroll(rememberScrollState())
-                    .padding(32.dp),
-                horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.spacedBy(20.dp)
-            ) {
-                Surface(
-                    modifier = Modifier.size(120.dp),
-                    shape = RoundedCornerShape(60.dp),
-                    color = MaterialTheme.colorScheme.primaryContainer
-                ) {
-                    Box(contentAlignment = Alignment.Center) {
-                        Icon(
-                            painterResource(R.drawable.material_symbols_outlined_restaurant),
-                            contentDescription = "No recipes",
-                            modifier = Modifier.size(64.dp),
-                            tint = MaterialTheme.colorScheme.primary
-                        )
-                    }
+            EmptyRecipesState(
+                onAddRecipeClick = {
+                    navController.navigate(Routes.AddRecipe.route)
                 }
-
-                Text(
-                    text = "No Recipes Yet",
-                    style = MaterialTheme.typography.headlineSmall,
-                    fontWeight = FontWeight.Bold,
-                    color = MaterialTheme.colorScheme.onBackground
-                )
-
-                Text(
-                    text = "Start building your recipe collection!",
-                    style = MaterialTheme.typography.bodyLarge,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant
-                )
-
-                Spacer(modifier = Modifier.height(8.dp))
-
-                Button(
-                    onClick = { navController.navigate(Routes.AddRecipe.route) },
-                    modifier = Modifier.height(48.dp),
-                    shape = RoundedCornerShape(12.dp)
-                ) {
-                    Icon(
-                        imageVector = Icons.Default.Add,
-                        contentDescription = "Add",
-                        modifier = Modifier.size(20.dp)
-                    )
-                    Spacer(modifier = Modifier.width(8.dp))
-                    Text(
-                        text = "Add Your First Recipe",
-                        style = MaterialTheme.typography.titleSmall
-                    )
-                }
-            }
+            )
         } else {
-            LazyColumn(
-                modifier = Modifier.fillMaxSize(),
-                contentPadding = PaddingValues(20.dp),
-                verticalArrangement = Arrangement.spacedBy(16.dp)
-            ) {
-                item {
-                    Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
-                        Text(
-                            text = "${viewModel.recipes.size} Recipe${if (viewModel.recipes.size != 1) "s" else ""}",
-                            style = MaterialTheme.typography.titleLarge,
-                            fontWeight = FontWeight.SemiBold,
-                            color = MaterialTheme.colorScheme.primary
-                        )
-
-                        Text(
-                            text = "Tap any recipe to view details",
-                            style = MaterialTheme.typography.bodyMedium,
-                            color = MaterialTheme.colorScheme.onSurfaceVariant
-                        )
-
-                        Spacer(modifier = Modifier.height(8.dp))
-                    }
+            RecipeListContent(
+                recipes = viewModel.recipes,
+                onRecipeClick = { recipe ->
+                    navController.navigate(Routes.RecipeDetail.go(recipe.name))
+                },
+                onDeleteClick = { recipe ->
+                    viewModel.removeRecipe(recipe)
                 }
-
-                items(viewModel.recipes) { recipe ->
-                    RecipeListItem(
-                        recipe = recipe,
-                        onRecipeClick = {
-                            navController.navigate(Routes.RecipeDetail.go(recipe.name))
-                        },
-                        onDeleteClick = {
-                            viewModel.removeRecipe(recipe)
-                        }
-                    )
-                }
-            }
+            )
         }
     }
 }

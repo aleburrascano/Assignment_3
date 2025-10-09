@@ -1,4 +1,4 @@
-package com.example.assignment_3.composables
+package com.example.assignment_3.screens.addrecipe
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -24,6 +24,25 @@ import androidx.compose.ui.unit.dp
 import com.example.assignment_3.models.Ingredient
 import androidx.compose.ui.window.Dialog
 
+/**
+ * Modal dialog for adding new ingredients to a recipe.
+ *
+ * Features:
+ * - Ingredient name input (required)
+ * - Amount input (optional, validates numeric values)
+ * - Unit input (optional, e.g., "cups", "tbsp")
+ * - Form validation with error callbacks
+ * - Automatic field clearing after successful addition
+ *
+ * Validation Rules:
+ * - Ingredient name cannot be blank
+ * - Amount must be a valid positive number if provided
+ * - Unit field is completely optional
+ *
+ * @param onDismiss Callback when dialog should be closed (cancel or backdrop tap)
+ * @param onAdd Callback when ingredient is successfully added (receives Ingredient object)
+ * @param onError Callback for validation errors (receives error message string)
+ */
 @Composable
 fun AddIngredientDialog(
     onDismiss: () -> Unit,

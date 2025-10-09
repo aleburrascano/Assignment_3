@@ -1,4 +1,4 @@
-package com.example.assignment_3.screens
+package com.example.assignment_3.screens.about
 
 import com.example.assignment_3.R
 import androidx.compose.foundation.layout.Arrangement
@@ -48,72 +48,12 @@ fun AboutScreen() {
         ) {
             Spacer(modifier = Modifier.height(16.dp))
 
-            // App Icon
-            Surface(
-                modifier = Modifier.size(140.dp),
-                shape = RoundedCornerShape(70.dp),
-                color = MaterialTheme.colorScheme.primaryContainer,
-                shadowElevation = 8.dp
-            ) {
-                Box(contentAlignment = Alignment.Center) {
-                    Icon(
-                        painter = painterResource(R.drawable.material_symbols_outlined_restaurant),
-                        contentDescription = "Recipe Tracker",
-                        modifier = Modifier.size(80.dp),
-                        tint = MaterialTheme.colorScheme.primary
-                    )
-                }
-            }
-
-            // App Title
-            Column(
-                horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.spacedBy(8.dp)
-            ) {
-                Text(
-                    text = "Recipe Tracker",
-                    style = MaterialTheme.typography.bodyLarge,
-                    fontWeight = FontWeight.Bold,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant,
-                    textAlign = TextAlign.Center
-                )
-
-                Text(
-                    text = "Your personal cooking companion",
-                    style = MaterialTheme.typography.bodyLarge,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant,
-                    textAlign = TextAlign.Center
-                )
-            }
+            AppBrandingSection()
 
             Spacer(modifier = Modifier.height(8.dp))
 
             // Description Card
-            OutlinedCard(
-                modifier = Modifier.fillMaxWidth(),
-                colors = CardDefaults.outlinedCardColors(
-                    containerColor = MaterialTheme.colorScheme.surface
-                )
-            ) {
-                Column(
-                    modifier = Modifier.padding(20.dp),
-                    verticalArrangement = Arrangement.spacedBy(12.dp)
-                ) {
-                    Text(
-                        text = "About This App",
-                        style = MaterialTheme.typography.titleLarge,
-                        fontWeight = FontWeight.Bold,
-                        color = MaterialTheme.colorScheme.primary
-                    )
 
-                    Text(
-                        text = "Recipe Tracker helps you organize and preserve your favorite recipes. Whether it's a family tradition or a new discovery, keep all your culinary creations in one beautiful place.",
-                        style = MaterialTheme.typography.bodyLarge,
-                        color = MaterialTheme.colorScheme.onSurface,
-                        lineHeight = MaterialTheme.typography.bodyLarge.lineHeight
-                    )
-                }
-            }
 
             OutlinedCard(
                 modifier = Modifier.fillMaxWidth(),

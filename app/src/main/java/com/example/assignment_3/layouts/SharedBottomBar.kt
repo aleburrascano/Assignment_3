@@ -17,6 +17,30 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import com.example.assignment_3.navigation.LocalNavController
 import com.example.assignment_3.navigation.Routes
 
+/**
+ * Shared bottom navigation bar providing access to primary app sections.
+ *
+ * Navigation Items:
+ * - Add: Navigate to recipe creation screen
+ * - Recipes: Navigate to recipe list/browse screen
+ * - About: Navigate to app information screen
+ *
+ * Features:
+ * - Automatic selection state based on current route
+ * - Material 3 NavigationBar with proper theming
+ * - Accessible icons and labels for each destination
+ * - Handles navigation to prevent duplicate entries in stack
+ *
+ * State Management:
+ * - Tracks current destination using NavController's back stack
+ * - Highlights current section with Material 3 selection indicators
+ * - Route matching handles parameterized routes (like Recipe Detail)
+ *
+ * Design:
+ * - Surface color background with elevated appearance
+ * - Standard Material 3 navigation patterns
+ * - Clear iconography for each section
+ */
 @Composable
 fun SharedBottomBar() {
     val navController = LocalNavController.current

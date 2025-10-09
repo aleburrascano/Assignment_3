@@ -24,25 +24,6 @@ val LocalRecipeViewModel = compositionLocalOf<RecipeViewModel> {
     error("No RecipeViewModel found!")
 }
 
-/**
- * Main navigation router for the Recipe Tracker application.
- *
- * Sets up the navigation graph with all available screens and provides
- * shared dependencies through CompositionLocal providers.
- *
- * Features:
- * - Navigation between Add Recipe, Recipe List, Recipe Detail, and About screens
- * - Shared RecipeViewModel across all screens for state management
- * - NavController access throughout the app hierarchy
- * - Automatic argument extraction for Recipe Detail screen
- *
- * Navigation Flow:
- * - Start destination: Add Recipe screen
- * - Recipe Detail requires recipeName parameter from navigation arguments
- * - All screens have access to bottom navigation for quick switching
- *
- * @param modifier Optional modifier for the NavHost container
- */
 @Composable
 fun Router(modifier: Modifier = Modifier) {
     val navController = rememberNavController()
