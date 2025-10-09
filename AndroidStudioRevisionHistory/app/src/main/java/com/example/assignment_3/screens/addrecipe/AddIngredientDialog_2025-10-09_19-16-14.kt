@@ -19,7 +19,6 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -55,8 +54,6 @@ fun AddIngredientDialog(
     var ingredientName by rememberSaveable { mutableStateOf("") }
     var ingredientAmount by rememberSaveable { mutableStateOf("") }
     var ingredientUnit by rememberSaveable { mutableStateOf("") }
-
-    val context = LocalContext.current
 
     Dialog(onDismissRequest = onDismiss) {
         Surface(

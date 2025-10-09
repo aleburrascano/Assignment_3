@@ -38,24 +38,4 @@
     <string name="photo">Photo</string>
     <string name="add_photo">Add Photo</string>
     <string name="change_photo">Change Photo</string>
-    <string name="please_enter_a_recipe_name">Please enter a recipe name</string>
-    <string name="recipe_name_must_be_at_least_3_characters_long">Recipe name must be at least 3 characters long</string>
-    <string name="please_add_at_least_one_ingredient">Please add at least one ingredient</string>
-    <string name="save_recipe">Save Recipe</string>
-    <string name="restaurant_utensils">Restaurant utensils</string>
-    <string name="recipe_not_found">Recipe Not Found</string>
-    <string name="this_recipe_doesn_t_exist_or_was_deleted">This recipe doesn\'t exist or was deleted</string>
-    <string name="recipe_details">Recipe Details</string>
-    <string name="no_photo_available">No photo available</string>
-    <string name="back_to_recipes">Back to Recipes</string>
-    <string name="view_all_recipes">View All Recipes</string>
-    <string name="add_your_first_recipe">Add Your First Recipe</string>
-    <string name="delete_recipe">Delete recipe</string>
-    <string name="no_recipes">No recipes</string>
-    <string name="no_recipes_yet">No Recipes Yet</string>
-    <string name="start_building_your_recipe_collection">Start building your recipe collection!</string>
-    <string name="no_photo">No photo</string>
-    <string name="tap_any_recipe_to_view_details">Tap any recipe to view details</string>
-    <string name="my_recipes">My Recipes</string>
-    <string name="add_recipe">Add Recipe</string>
 </resources>
