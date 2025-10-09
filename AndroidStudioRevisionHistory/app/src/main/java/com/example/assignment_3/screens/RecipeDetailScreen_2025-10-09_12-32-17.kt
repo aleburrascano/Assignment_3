@@ -1,5 +1,6 @@
 package com.example.assignment_3.screens
 
+import com.example.assignment_3.R
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -10,11 +11,12 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.HorizontalDivider
@@ -31,7 +33,6 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
-import com.example.assignment_3.R
 import com.example.assignment_3.layouts.MainLayout
 import com.example.assignment_3.navigation.LocalNavController
 import com.example.assignment_3.navigation.LocalRecipeViewModel
@@ -198,68 +199,9 @@ fun RecipeDetailScreen(recipeName: String) {
 
                         HorizontalDivider()
 
-                        Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
-                            recipe.ingredients.forEach { ingredient ->
-                                Surface(
-                                    modifier = Modifier.fillMaxWidth(),
-                                    shape = RoundedCornerShape(8.dp),
-                                    color = MaterialTheme.colorScheme.surfaceVariant
-                                ) {
-                                    Row(
-                                        modifier = Modifier
-                                            .fillMaxWidth()
-                                            .padding(12.dp),
-                                        verticalAlignment = Alignment.CenterVertically,
-                                        horizontalArrangement = Arrangement.spacedBy(12.dp)
-                                    ) {
-                                        Surface(
-                                            shape = RoundedCornerShape(4.dp),
-                                            color = MaterialTheme.colorScheme.primary,
-                                            modifier = Modifier.size(8.dp)
-                                        ) {}
-
-                                        Column(modifier = Modifier.weight(1f)) {
-                                            Text(
-                                                text = ingredient.name,
-                                                style = MaterialTheme.typography.bodyLarge,
-                                                fontWeight = FontWeight.Medium
-                                            )
-
-                                            if (ingredient.amount > 0.0 || ingredient.unit.isNotBlank()) {
-                                                Text(
-                                                    text = "${ingredient.amount} ${ingredient.unit}".trim(),
-                                                    style = MaterialTheme.typography.bodyMedium,
-                                                    color = MaterialTheme.colorScheme.onSurfaceVariant
-                                                )
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
+                        Column(verticalArrangement = Arrangement.spacedBy(10.dp))
                     }
                 }
-
-                Spacer(modifier = Modifier.height(4.dp))
-                
-                Button(
-                    onClick = { navController.navigate(Routes.RecipeList.route) },
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .height(56.dp),
-                    shape = RoundedCornerShape(12.dp),
-                    colors = ButtonDefaults.buttonColors(
-                        containerColor = MaterialTheme.colorScheme.primary
-                    )
-                ) {
-                    Text(
-                        text = "View All Recipes",
-                        style = MaterialTheme.typography.titleMedium,
-                        fontWeight = FontWeight.SemiBold
-                    )
-                }
-
-                Spacer(modifier = Modifier.height(16.dp))
             }
         }
     }

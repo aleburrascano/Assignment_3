@@ -278,7 +278,7 @@ fun AddRecipeScreen() {
                                 color = MaterialTheme.colorScheme.onSurfaceVariant
                             )
 
-                            Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
+                            Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
                                 ingredients.forEachIndexed { index, ingredient ->
                                     Surface(
                                         modifier = Modifier.fillMaxWidth(),
@@ -289,31 +289,14 @@ fun AddRecipeScreen() {
                                             modifier = Modifier
                                                 .fillMaxWidth()
                                                 .padding(12.dp),
-                                            verticalAlignment = Alignment.CenterVertically,
-                                            horizontalArrangement = Arrangement.spacedBy(12.dp)
+                                            horizontalArrangement = Arrangement.SpaceBetween,
+                                            verticalAlignment = Alignment.CenterVertically
                                         ) {
-                                            Surface(
-                                                shape = RoundedCornerShape(4.dp),
-                                                color = MaterialTheme.colorScheme.primary,
-                                                modifier = Modifier.size(8.dp)
-                                            ) {}
-
-                                            Column(modifier = Modifier.weight(1f)) {
-                                                Text(
-                                                    text = ingredient.name,
-                                                    style = MaterialTheme.typography.bodyLarge,
-                                                    fontWeight = FontWeight.Medium
-                                                )
-
-                                                if (ingredient.amount > 0.0 || ingredient.unit.isNotBlank()) {
-                                                    Text(
-                                                        text = "${ingredient.amount} ${ingredient.unit}".trim(),
-                                                        style = MaterialTheme.typography.bodyMedium,
-                                                        color = MaterialTheme.colorScheme.onSurfaceVariant
-                                                    )
-                                                }
-                                            }
-
+                                            Text(
+                                                text = "• ${ingredient.amount} ${ingredient.unit} ${ingredient.name}",
+                                                style = MaterialTheme.typography.bodyMedium,
+                                                modifier = Modifier.weight(1f)
+                                            )
                                             IconButton(
                                                 onClick = { ingredients.removeAt(index) },
                                                 modifier = Modifier.size(36.dp)
@@ -387,7 +370,6 @@ fun AddRecipeScreen() {
                         showIngredientDialog = false
                     },
                     onError = { message ->
-                        showIngredientDialog = false
                         showError = true
                         errorMessage = message
                     }
@@ -407,8 +389,7 @@ fun AddRecipeScreen() {
                         .padding(16.dp),
                     shape = RoundedCornerShape(12.dp),
                     color = MaterialTheme.colorScheme.errorContainer,
-                    shadowElevation = 8.dp,
-                    tonalElevation = 16.dp
+                    shadowElevation = 8.dp
                 ) {
                     Row(
                         modifier = Modifier.padding(16.dp),

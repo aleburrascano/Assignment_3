@@ -219,7 +219,7 @@ fun FeatureItem(icon: @Composable () -> Unit, title: String, description: String
     Row(
         modifier = Modifier.fillMaxWidth(),
         horizontalArrangement = Arrangement.spacedBy(16.dp),
-        verticalAlignment = Alignment.CenterVertically
+        verticalAlignment = Alignment.Top
     ) {
         Surface(
             shape = RoundedCornerShape(12.dp),

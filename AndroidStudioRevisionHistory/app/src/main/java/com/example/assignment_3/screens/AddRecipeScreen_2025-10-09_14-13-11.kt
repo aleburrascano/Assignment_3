@@ -387,7 +387,6 @@ fun AddRecipeScreen() {
                         showIngredientDialog = false
                     },
                     onError = { message ->
-                        showIngredientDialog = false
                         showError = true
                         errorMessage = message
                     }
@@ -407,8 +406,7 @@ fun AddRecipeScreen() {
                         .padding(16.dp),
                     shape = RoundedCornerShape(12.dp),
                     color = MaterialTheme.colorScheme.errorContainer,
-                    shadowElevation = 8.dp,
-                    tonalElevation = 16.dp
+                    shadowElevation = 8.dp
                 ) {
                     Row(
                         modifier = Modifier.padding(16.dp),

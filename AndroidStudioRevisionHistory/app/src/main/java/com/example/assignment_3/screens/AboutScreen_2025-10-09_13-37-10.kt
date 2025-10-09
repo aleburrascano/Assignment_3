@@ -15,10 +15,13 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.CheckCircle
+import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.Edit
+import androidx.compose.material.icons.filled.LocationOn
 import androidx.compose.material.icons.filled.Star
+import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.ElevatedCard
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedCard
@@ -27,7 +30,6 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
@@ -132,29 +134,25 @@ fun AboutScreen() {
                         color = MaterialTheme.colorScheme.primary
                     )
 
-                    FeatureItem(
-                        icon = Icons.Default.Edit,
-                        title = "Easy Creation",
-                        description = "Create and save recipes with simple steps"
-                    )
-
-                    FeatureItem(
-                        icon = Icons.Default.Star,
-                        title = "Photo Support",
-                        description = "Add beautiful photos to your recipes"
-                    )
-
-                    FeatureItem(
-                        icon = Icons.Default.CheckCircle,
-                        title = "Ingredient Tracking",
-                        description = "Organize ingredients with precise measurements"
-                    )
-
-                    FeatureItem(
-                        painter = painterResource(R.drawable.material_symbols_outlined_restaurant),
-                        title = "Quick Access",
-                        description = "Find and view your recipes instantly"
-                    )
+//                    FeatureItem(
+//                        icon = Icons.Default.Edit,
+//                        text = "Create and save your favorite recipes"
+//                    )
+//
+//                    FeatureItem(
+//                        icon = Icons.Default.Star,
+//                        text = "Add photos to your recipes"
+//                    )
+//
+//                    FeatureItem(
+//                        icon = Icons.Default.Star,
+//                        text = "Organize ingredients with measurements"
+//                    )
+//
+//                    FeatureItem(
+//                        icon = Icons.Default.Delete,
+//                        text = "Easy recipe management"
+//                    )
                 }
             }
 
@@ -189,37 +187,11 @@ fun AboutScreen() {
 }
 
 @Composable
-fun FeatureItem(
-    icon: ImageVector,
-    title: String,
-    description: String
-) {
-    FeatureItem(
-        icon = { Icon(imageVector = icon, contentDescription = title) },
-        title = title,
-        description = description
-    )
-}
-
-@Composable
-fun FeatureItem(
-    painter: Painter,
-    title: String,
-    description: String
-) {
-    FeatureItem(
-        icon = { Icon(painter = painter, contentDescription = title) },
-        title = title,
-        description = description
-    )
-}
-
-@Composable
-fun FeatureItem(icon: @Composable () -> Unit, title: String, description: String) {
+fun FeatureItem(icon: ImageVector, title: String, description: String) {
     Row(
         modifier = Modifier.fillMaxWidth(),
         horizontalArrangement = Arrangement.spacedBy(16.dp),
-        verticalAlignment = Alignment.CenterVertically
+        verticalAlignment = Alignment.Top
     ) {
         Surface(
             shape = RoundedCornerShape(12.dp),
@@ -227,26 +199,13 @@ fun FeatureItem(icon: @Composable () -> Unit, title: String, description: String
             modifier = Modifier.size(48.dp)
         ) {
             Box(contentAlignment = Alignment.Center) {
-                icon()
+                Icon(
+                    imageVector = icon,
+                    contentDescription = title,
+                    tint = MaterialTheme.colorScheme.primary,
+                    modifier = Modifier.size(24.dp)
+                )
             }
-        }
-
-        Column(
-            modifier = Modifier.weight(1f),
-            verticalArrangement = Arrangement.spacedBy(4.dp)
-        ) {
-            Text(
-                text = title,
-                style = MaterialTheme.typography.titleMedium,
-                fontWeight = FontWeight.SemiBold,
-                color = MaterialTheme.colorScheme.onSurface
-            )
-
-            Text(
-                text = description,
-                style = MaterialTheme.typography.bodyMedium,
-                color = MaterialTheme.colorScheme.onSurfaceVariant
-            )
         }
     }
 }

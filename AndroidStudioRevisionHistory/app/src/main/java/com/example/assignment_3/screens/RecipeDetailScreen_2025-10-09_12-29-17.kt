@@ -1,23 +1,23 @@
 package com.example.assignment_3.screens
 
+import com.example.assignment_3.R
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedCard
@@ -31,7 +31,6 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
-import com.example.assignment_3.R
 import com.example.assignment_3.layouts.MainLayout
 import com.example.assignment_3.navigation.LocalNavController
 import com.example.assignment_3.navigation.LocalRecipeViewModel
@@ -146,120 +145,39 @@ fun RecipeDetailScreen(recipeName: String) {
                             ) {
                                 Icon(
                                     painterResource(R.drawable.material_symbols_outlined_photo_camera),
-                                    contentDescription = "No photo available",
+                                    contentDescription = "No photo",
                                     modifier = Modifier.size(64.dp),
-                                    tint = MaterialTheme.colorScheme.onSurfaceVariant
-                                )
-                                Text(
-                                    text = "No photo available",
-                                    style = MaterialTheme.typography.bodyMedium,
-                                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                                    tint = MaterialTheme.colorScheme.onSurface
                                 )
                             }
                         }
                     }
                 }
 
-                OutlinedCard(
-                    modifier = Modifier.fillMaxWidth(),
-                    colors = CardDefaults.outlinedCardColors(
-                        containerColor = MaterialTheme.colorScheme.surface
-                    )
-                ) {
-                    Column(
-                        modifier = Modifier.padding(16.dp),
-                        verticalArrangement = Arrangement.spacedBy(12.dp)
-                    ) {
-                        Row(
-                            modifier = Modifier.fillMaxWidth(),
-                            horizontalArrangement = Arrangement.SpaceBetween,
-                            verticalAlignment = Alignment.CenterVertically
-                        ) {
+                Text(
+                    text = "Ingredients:",
+                    style = MaterialTheme.typography.titleMedium
+                )
+
+                Card(modifier = Modifier.fillMaxWidth()) {
+                    LazyColumn(modifier = Modifier.padding(16.dp)) {
+                        items(recipe.ingredients) { ingredient ->
                             Text(
-                                text = "Ingredients",
-                                style = MaterialTheme.typography.titleLarge,
-                                fontWeight = FontWeight.SemiBold,
-                                color = MaterialTheme.colorScheme.primary
+                                text = "${ingredient.amount} ${ingredient.unit} ${ingredient.name}",
+                                style = MaterialTheme.typography.bodyMedium
                             )
-
-                            Surface(
-                                shape = RoundedCornerShape(20.dp),
-                                color = MaterialTheme.colorScheme.primaryContainer
-                            ) {
-                                Text(
-                                    text = "${recipe.ingredients.size}",
-                                    style = MaterialTheme.typography.titleSmall,
-                                    fontWeight = FontWeight.Bold,
-                                    color = MaterialTheme.colorScheme.primary,
-                                    modifier = Modifier.padding(horizontal = 12.dp, vertical = 6.dp)
-                                )
-                            }
-                        }
-
-                        HorizontalDivider()
-
-                        Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
-                            recipe.ingredients.forEach { ingredient ->
-                                Surface(
-                                    modifier = Modifier.fillMaxWidth(),
-                                    shape = RoundedCornerShape(8.dp),
-                                    color = MaterialTheme.colorScheme.surfaceVariant
-                                ) {
-                                    Row(
-                                        modifier = Modifier
-                                            .fillMaxWidth()
-                                            .padding(12.dp),
-                                        verticalAlignment = Alignment.CenterVertically,
-                                        horizontalArrangement = Arrangement.spacedBy(12.dp)
-                                    ) {
-                                        Surface(
-                                            shape = RoundedCornerShape(4.dp),
-                                            color = MaterialTheme.colorScheme.primary,
-                                            modifier = Modifier.size(8.dp)
-                                        ) {}
-
-                                        Column(modifier = Modifier.weight(1f)) {
-                                            Text(
-                                                text = ingredient.name,
-                                                style = MaterialTheme.typography.bodyLarge,
-                                                fontWeight = FontWeight.Medium
-                                            )
-
-                                            if (ingredient.amount > 0.0 || ingredient.unit.isNotBlank()) {
-                                                Text(
-                                                    text = "${ingredient.amount} ${ingredient.unit}".trim(),
-                                                    style = MaterialTheme.typography.bodyMedium,
-                                                    color = MaterialTheme.colorScheme.onSurfaceVariant
-                                                )
-                                            }
-                                        }
-                                    }
-                                }
-                            }
                         }
                     }
                 }
 
-                Spacer(modifier = Modifier.height(4.dp))
-                
+                Spacer(modifier = Modifier.weight(1f))
+
                 Button(
                     onClick = { navController.navigate(Routes.RecipeList.route) },
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .height(56.dp),
-                    shape = RoundedCornerShape(12.dp),
-                    colors = ButtonDefaults.buttonColors(
-                        containerColor = MaterialTheme.colorScheme.primary
-                    )
+                    modifier = Modifier.fillMaxWidth()
                 ) {
-                    Text(
-                        text = "View All Recipes",
-                        style = MaterialTheme.typography.titleMedium,
-                        fontWeight = FontWeight.SemiBold
-                    )
+                    Text(text = "View All Recipes")
                 }
-
-                Spacer(modifier = Modifier.height(16.dp))
             }
         }
     }
