@@ -2,16 +2,11 @@ package com.example.assignment_3.screens.recipelist
 
 import com.example.assignment_3.R
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.saveable.rememberSaveable
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.res.stringResource
 import com.example.assignment_3.layouts.MainLayout
 import com.example.assignment_3.navigation.LocalNavController
 import com.example.assignment_3.navigation.LocalRecipeViewModel
 import com.example.assignment_3.navigation.Routes
-import com.example.assignment_3.models.Recipe
 
 /**
  * Main screen displaying a list of all saved recipes.
@@ -21,15 +16,13 @@ import com.example.assignment_3.models.Recipe
  * - Scrollable list of recipe cards with thumbnails
  * - Recipe count header with helpful instructions
  * - Click navigation to recipe details
- * - Delete confirmation dialog for safety
+ * - Delete functionality with confirmation
  * - Responsive layout with proper spacing
  */
 @Composable
 fun RecipeListScreen() {
     val navController = LocalNavController.current
     val viewModel = LocalRecipeViewModel.current
-
-    var recipeToDelete by rememberSaveable { mutableStateOf<Recipe?>(null) }
 
     MainLayout(screenTitle = stringResource(R.string.my_recipes)) {
         if (viewModel.recipes.isEmpty()) {
@@ -45,18 +38,7 @@ fun RecipeListScreen() {
                     navController.navigate(Routes.RecipeDetail.go(recipe.name))
                 },
                 onDeleteClick = { recipe ->
-                    recipeToDelete = recipe
-                }
-            )
-        }
-
-        recipeToDelete?.let { recipe ->
-            DeleteConfirmationDialog(
-                recipeName = recipe.name,
-                onDismiss = { recipeToDelete = null },
-                onConfirm = {
                     viewModel.removeRecipe(recipe)
-                    recipeToDelete = null
                 }
             )
         }

@@ -2,10 +2,8 @@ package com.example.assignment_3.screens.recipelist
 
 import com.example.assignment_3.R
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.res.stringResource
 import com.example.assignment_3.layouts.MainLayout
 import com.example.assignment_3.navigation.LocalNavController
@@ -45,7 +43,7 @@ fun RecipeListScreen() {
                     navController.navigate(Routes.RecipeDetail.go(recipe.name))
                 },
                 onDeleteClick = { recipe ->
-                    recipeToDelete = recipe
+                    viewModel.removeRecipe(recipe)
                 }
             )
         }

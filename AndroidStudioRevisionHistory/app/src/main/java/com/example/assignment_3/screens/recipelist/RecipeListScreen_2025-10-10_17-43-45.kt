@@ -45,7 +45,7 @@ fun RecipeListScreen() {
                     navController.navigate(Routes.RecipeDetail.go(recipe.name))
                 },
                 onDeleteClick = { recipe ->
-                    recipeToDelete = recipe
+                    viewModel.removeRecipe(recipe)
                 }
             )
         }
